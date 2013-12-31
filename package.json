@@ -30,6 +30,7 @@
     "chai": "~1.8.1",
     "express": "~3.4.7",
     "coffee-script": "~1.6.3",
-    "hubot": "~2.6.5"
+    "hubot": "~2.6.5",
+    "hubot-mock-adapter": "~1.0.0"
   }
 }
