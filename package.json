@@ -1,6 +1,6 @@
 {
   "name": "hubot-url",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/bouzuya/hubot-url",
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">= 0.8.x"
   },
   "dependencies": {
     "scraper": "0.0.9"
@@ -30,6 +30,7 @@
     "chai": "~1.8.1",
     "express": "~3.4.7",
     "coffee-script": "~1.6.3",
-    "hubot": "~2.6.5"
+    "hubot": "~2.6.5",
+    "hubot-mock-adapter": "~1.0.0"
   }
 }
