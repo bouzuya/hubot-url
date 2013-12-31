@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/bouzuya/hubot-url",
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">= 0.8.x"
   },
   "dependencies": {
     "scraper": "0.0.9"
