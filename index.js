@@ -42,9 +42,11 @@ module.exports = function(robot) {
       if (err) throw err;
       var title = $('title').text();
       var ogp = parseOgp($);
-      var t = title || ogp.title || 'no title';
+      var t = title || ogp.title || '';
       var i = ogp.image || '';
-      msg.send(t + ' ' + i);
+      if (t !== '' || t !== '') {
+        msg.send(t + ' ' + i);
+      }
     });
   });
 };

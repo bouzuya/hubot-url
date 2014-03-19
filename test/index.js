@@ -19,6 +19,11 @@ describe('', function() {
       html += '</head><body></body></html>';
       res.send(html);
     });
+    server.get('/empty', function(req, res) {
+      var html = '';
+      html += '<html><head><title></title></head><body></body></html>';
+      res.send(html);
+    });
     server.listen(3000);
 
     var adapter = 'mock-adapter';
@@ -36,7 +41,7 @@ describe('', function() {
     done();
   });
 
-  describe('', function() {
+  describe('/', function() {
     it('works', function(done) {
       var message = 'http://localhost:3000/';
       robot.adapter.on('send', function(envelope, strings) {
@@ -44,6 +49,21 @@ describe('', function() {
         done();
       });
       robot.adapter.receive(new hubot.TextMessage('', message));
+    });
+  });
+
+  describe('/empty', function() {
+    it('works', function(done) {
+      var message = 'http://localhost:3000/empty';
+      var called = false;
+      robot.adapter.on('send', function() {
+        called = true;
+      });
+      robot.adapter.receive(new hubot.TextMessage('', message));
+      setTimeout(function() {
+        expect(called).to.be.false;
+        done();
+      }, 500);
     });
   });
 
