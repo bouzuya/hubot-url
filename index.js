@@ -2,13 +2,13 @@
 //   fetch url, respond title and og:image
 //
 // Dependencies:
+//   "scraper": "0.0.9"
 //
 // Configuration:
+//   None
 //
 // Commands:
 //   ^https?://.*$ - respond title and og:image
-//
-// Notes:
 //
 // Author:
 //   bouzuya <bouzuya@gmail.com>
