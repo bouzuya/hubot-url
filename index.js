@@ -5,7 +5,7 @@
 //   "scraper": "0.0.9"
 //
 // Configuration:
-//   None
+//   HUBOT_URL_IGNORE_PATTERNS
 //
 // Commands:
 //   ^https?://.*$ - respond title and og:image
@@ -35,8 +35,20 @@ var parseOgp = function($) {
 };
 
 module.exports = function(robot) {
+
   robot.hear(/^(https?:\/\/.*)$/, function(msg) {
     var url = msg.match[1];
+
+    var patterns = process.env.HUBOT_URL_IGNORE_PATTERNS || '[]';
+    patterns = JSON.parse(patterns);
+    patterns = patterns.map(function(p) {
+      return new RegExp(p);
+    });
+
+    if (patterns.some(function(p) { return p.test(url); })) {
+      return;
+    }
+
     // msg.send('fetching... ' + url);
     scraper(url, function(err, $) {
       if (err) throw err;
