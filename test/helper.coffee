@@ -1,10 +1,8 @@
-{expect} = require 'chai'
-RobotDriver = require './robot-driver'
-
-global.expect = expect
+global.expect = require('chai').use(require('sinon-chai')).expect
+{Kakashi} = require 'kakashi'
 
 beforeEach ->
-  @driver = new RobotDriver
+  @kakashi = new Kakashi(httpd: false)
 
-afterEach ->
-  @driver.stop()
+afterEach (done) ->
+  @kakashi.stop().then(done, done)
