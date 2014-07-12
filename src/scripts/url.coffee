@@ -19,7 +19,8 @@ parseOgp = ($) ->
   ogp = {}
   $('meta')
     .filter ->
-      property = $(@).attr 'property'
+      e = $(@)
+      property = e.attr 'property'
       /^og:.*$/.test property
     .map ->
       e = $(@)
@@ -34,6 +35,7 @@ parseOgp = ($) ->
 module.exports = (robot) ->
 
   robot.hear /^(https?:\/\/.*)$/, (msg) ->
+
     url = msg.match[1]
 
     patterns = process.env.HUBOT_URL_IGNORE_PATTERNS or '[]'
@@ -48,6 +50,7 @@ module.exports = (robot) ->
         $ = cheerio.load body
         title = $('title').text()
         ogp = parseOgp $
-        t = title || ogp.title || ''
-        i = ogp.image || ''
-        msg.send(t + ' ' + i) if t isnt '' or i isnt ''
+        t = title or ogp.title or null
+        i = ogp.image or null
+        msg.send(t) if t?
+        msg.send(i) if i?
