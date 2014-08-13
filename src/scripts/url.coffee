@@ -44,7 +44,7 @@ module.exports = (robot) ->
     return if patterns.some (p) -> p.test(url)
 
     msg
-      .http url
+      .http(url)
       .get() (err, res, body) ->
         throw err if err
         $ = cheerio.load body

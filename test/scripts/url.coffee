@@ -36,23 +36,22 @@ describe 'url', ->
       sender = { id: 'bouzuya', room: 'bouzuya.net' }
       message = 'http://localhost:3000/'
       @kakashi
-        .maxCallCount 2
-        .receive sender, message
+        .maxCallCount(2)
+        .receive(sender, message)
         .then =>
           expect(@kakashi.send.firstCall.args[1])
             .to.equal('Title')
           expect(@kakashi.send.secondCall.args[1])
             .to.equal('http://localhost:3000/img.png')
-        .then (-> done()), done
+        .then((-> done()), done)
 
   describe '/empty', ->
     it 'throws timeout error', (done) ->
       sender = { id: 'bouzuya', room: 'bouzuya.net' }
       message = 'http://localhost:3000/empty'
       @kakashi
-        .receive sender, message
-        .then (-> done(new Error('test failure')))
-        , (e) ->
+        .receive(sender, message)
+        .then (-> done(new Error('test failure'))), (e) ->
           expect(e.message).to.equal('timeout')
           done()
 
@@ -63,9 +62,8 @@ describe 'url', ->
       sender = { id: 'bouzuya', room: 'bouzuya.net' }
       message = 'http://localhost:3000/'
       @kakashi
-        .receive sender, message
-        .then (-> done(new Error('test failure')))
-        , (e) ->
+        .receive(sender, message)
+        .then (-> done(new Error('test failure'))), (e) ->
           expect(e.message).to.equal('timeout')
           done()
 
@@ -76,9 +74,8 @@ describe 'url', ->
       sender = { id: 'bouzuya', room: 'bouzuya.net' }
       message = 'http://localhost:3000/'
       @kakashi
-        .receive sender, message
-        .then (-> done(new Error('test failure')))
-        , (e) ->
+        .receive(sender, message)
+        .then (-> done(new Error('test failure'))), (e) ->
           expect(e.message).to.equal('timeout')
           process.env.HUBOT_URL_IGNORE_PATTERNS = original
           done()
@@ -90,7 +87,7 @@ describe 'url', ->
       sender = { id: 'bouzuya', room: 'bouzuya.net' }
       message = 'http://localhost:3000/'
       @kakashi
-        .receive sender, message
+        .receive(sender, message)
         .then =>
           expect(@kakashi.send.firstCall.args[1])
             .to.equal('Title')
